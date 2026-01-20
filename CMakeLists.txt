@@ -12,5 +12,7 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(dascript)
 
 SETUP_COMPILER()
-add_executable(hello_from_das main.cpp)
-target_link_libraries(hello_from_das PRIVATE libDaScript)
+add_executable(hello_from_das_cpp main.cpp)
+add_executable(hello_from_das_c main-C.c)
+target_link_libraries(hello_from_das_cpp PRIVATE libDaScript)
+target_link_libraries(hello_from_das_c PRIVATE libDaScript)
