@@ -102,6 +102,9 @@ int main( int argc, char ** argv ) {
     (void)argc; (void)argv;
     // Initialize all default modules
     das_initialize();
+    void* fa = das_fileaccess_make_default();
+    das_register_dynamic_modules(fa, "./", NULL);
+    das_fileaccess_release(fa);
     // register modules
     register_module();
     // run the tutorial
