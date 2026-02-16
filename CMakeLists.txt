@@ -3,9 +3,13 @@ project (das-example)
 
 find_package(DAS REQUIRED)
 
-# # C++ is temporary not supported until DAS not expose stable API.
-# add_executable(hello_from_das_cpp main.cpp)
-# target_link_libraries(hello_from_das_cpp PRIVATE DAS::libDaScript)
+# C++ API is not stable and subject to change.
+add_executable(hello_from_das_cpp main.cpp)
+target_link_libraries(hello_from_das_cpp PRIVATE DAS::libDaScriptDyn)
+
+# For Release build we should manually set NDEBUG for now. It will be shipped
+# with `libDaScript` cmake package soon.
+SET(CMAKE_CXX_FLAGS "-DNDEBUG=0")
 
 # Note, there's no static dependencies on submodule.
 add_executable(hello_from_das_c main-C.c)
