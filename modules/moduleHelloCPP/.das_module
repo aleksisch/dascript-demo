@@ -1,0 +1,13 @@
+options gen2
+require fio
+
+[export]
+def initialize(project_path : string) {
+    if (das_is_dll_build()) {
+        // Example of dynamic cpp module.
+        // Dynamic modules can only be used with dyn build.
+        register_dynamic_module("{project_path}/hello_ModuleCPP.das_module", "Module_HelloCPP", 2)
+    }
+    // Example of das module.
+    register_native_path("Hello", "hello_module_cpp", "{project_path}/hello_module.das")
+}
