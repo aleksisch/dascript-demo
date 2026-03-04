@@ -6,14 +6,14 @@ find_package(DAS REQUIRED)
 # Create CPP-AOT file.
 ADD_CUSTOM_COMMAND(
     OUTPUT  "hello_module.aot.cpp"
-    DEPENDS DAS::daslang_dyn "hello_module.das"
+    DEPENDS DAS::daslang "hello_module.das"
     COMMENT "AOT compiling file"
     # Linking with library => use aotlib and manually reference generated
     # variable in `hello_module.cpp`.
-    COMMAND DAS::daslang_dyn -aotlib "hello_module.das" "hello_module.aot.cpp"
+    COMMAND DAS::daslang -aotlib "${CMAKE_CURRENT_SOURCE_DIR}/hello_module.das" "${CMAKE_CURRENT_SOURCE_DIR}/hello_module.aot.cpp"
 )
 
-add_library(hello_ModuleCPP SHARED hello_module.cpp hello_module.aot.cpp)
+add_library(hello_ModuleCPP SHARED hello_module.cpp ${CMAKE_CURRENT_SOURCE_DIR}/hello_module.aot.cpp)
 target_link_libraries(hello_ModuleCPP PRIVATE DAS::libDaScriptDyn)
 
 # For Release build we should manually set
