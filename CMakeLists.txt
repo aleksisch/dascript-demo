@@ -7,10 +7,6 @@ find_package(DAS REQUIRED)
 add_executable(hello_from_das_cpp main.cpp)
 target_link_libraries(hello_from_das_cpp PRIVATE DAS::libDaScriptDyn)
 
-# For Release build we should manually set NDEBUG for now. It will be shipped
-# with `libDaScript` cmake package soon.
-SET(CMAKE_CXX_FLAGS "-DNDEBUG=0")
-
 # Note, there's no static dependencies on submodule.
 add_executable(hello_from_das_c main-C.c)
 target_link_libraries(hello_from_das_c PRIVATE DAS::libDaScriptDyn)
